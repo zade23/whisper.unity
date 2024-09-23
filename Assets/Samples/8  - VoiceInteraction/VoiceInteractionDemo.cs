@@ -10,7 +10,7 @@ namespace Whisper.Samples
     /// <summary>
     /// Record audio clip from microphone and make a transcription.
     /// </summary>
-    public class MicrophoneDemo : MonoBehaviour
+    public class VoiceInteractionDemo : MonoBehaviour
     {
         public WhisperManager whisper;
         public MicrophoneRecord microphoneRecord;
@@ -23,9 +23,7 @@ namespace Whisper.Samples
         public Text outputText;
         public Text timeText;
         public Dropdown languageDropdown;
-        public Toggle translateToggle;
         public Toggle vadToggle;
-        public ScrollRect scroll;
         
         private string _buffer;
 
@@ -46,11 +44,6 @@ namespace Whisper.Samples
             .FindIndex(op => op.text == whisper.language);
             // 为语言下拉菜单添加值改变事件监听器，当选项改变时调用 OnLanguageChanged 方法
             languageDropdown.onValueChanged.AddListener(OnLanguageChanged);
-
-            // 设置翻译切换开关的初始状态为当前翻译状态
-            translateToggle.isOn = whisper.translateToEnglish;
-            // 为翻译切换开关添加值改变事件监听器，当状态改变时调用 OnTranslateChanged 方法
-            translateToggle.onValueChanged.AddListener(OnTranslateChanged);
 
             // 设置 VAD（语音活动检测）切换开关的初始状态为当前 VAD 状态
             vadToggle.isOn = microphoneRecord.vadStop;
@@ -102,11 +95,12 @@ namespace Whisper.Samples
             timeText.text = $"Time: {time} ms\nRate: {rate:F1}x";
 
             var text = res.Result;
+            
+            // 将语言附加到文本中
             if (printLanguage)
                 text += $"\n\nLanguage: {res.Language}";
             
             outputText.text = text;
-            UiUtils.ScrollDown(scroll);
         }
         
         /// <summary>
@@ -119,16 +113,6 @@ namespace Whisper.Samples
             var opt = languageDropdown.options[ind];
             // 更新管理器的语言
             whisper.language = opt.text;
-        }
-    
-        /// <summary>
-        /// 当翻译切换开关的值改变时调用此方法。
-        /// </summary>
-        /// <param name="translate">翻译切换开关的新状态。</param>
-        private void OnTranslateChanged(bool translate)
-        {
-            // 更新管理器的翻译状态
-            whisper.translateToEnglish = translate;
         }
 
         /// <summary>
@@ -158,8 +142,6 @@ namespace Whisper.Samples
             _buffer += segment.Text;
             // 更新输出文本为缓冲区的内容并添加省略号
             outputText.text = _buffer + "...";
-            // 滚动到最底部
-            UiUtils.ScrollDown(scroll);
         }
     }
 }

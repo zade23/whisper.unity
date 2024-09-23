@@ -61,7 +61,7 @@ namespace Whisper.Samples
             
             // 如果需要回声播放音频片段
             if (echoSound)
-            AudioSource.PlayClipAtPoint(clip, Vector3.zero);
+                AudioSource.PlayClipAtPoint(clip, Vector3.zero);
 
             // 创建并启动一个计时器
             var sw = new Stopwatch();
@@ -72,7 +72,7 @@ namespace Whisper.Samples
             
             // 如果结果为空或输出文本为空，则返回
             if (res == null || !outputText) 
-            return;
+                return;
 
             // 获取经过的时间（毫秒）
             var time = sw.ElapsedMilliseconds;
@@ -88,7 +88,7 @@ namespace Whisper.Samples
             
             // 如果需要打印语言信息，则附加语言信息
             if (printLanguage)
-            text += $"\n\nLanguage: {res.Language}";
+                text += $"\n\nLanguage: {res.Language}";
             
             // 更新输出文本
             outputText.text = text;
@@ -127,7 +127,7 @@ namespace Whisper.Samples
         {
             // 如果时间文本为空，则返回
             if (!timeText)
-            return;
+                return;
             // 更新时间文本为当前进度
             timeText.text = $"Progress: {progress}%";
         }
@@ -140,7 +140,7 @@ namespace Whisper.Samples
         {
             // 如果不需要流式传输片段或输出文本为空，则返回
             if (!streamSegments || !outputText)
-            return;
+                return;
 
             // 将新片段的文本附加到缓冲区
             _buffer += segment.Text;
