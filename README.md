@@ -25,14 +25,6 @@ This is Unity3d bindings for the [whisper.cpp](https://github.com/ggerganov/whis
 
 ## Samples
 
-https://user-images.githubusercontent.com/6161335/231581911-446286fd-833e-40a2-94d0-df2911b22cad.mp4
-
-*"whisper-small.bin" model tested in English, German and Russian from microphone*
-
-https://user-images.githubusercontent.com/6161335/231584644-c220a647-028a-42df-9e61-5291aca3fba0.mp4
-
-*"whisper-tiny.bin" model, 50x faster than realtime on Macbook with M1 Pro*
-
 ## Getting started
 Clone this repository and open it as regular Unity project. It comes with examples and tiny multilanguage model weights.
 
