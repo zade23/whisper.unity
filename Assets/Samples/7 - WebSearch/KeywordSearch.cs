@@ -53,7 +53,23 @@ public class KeywordSearch : MonoBehaviour
             }
             else
             {
-                outputArea.text = request.downloadHandler.text;
+                // 解析返回的 JSON 数据
+                var jsonResponse = request.downloadHandler.text;
+                Response response = JsonUtility.FromJson<Response>("{\"items\":" + jsonResponse + "}");
+
+                if (response.items.Length > 0)
+                {
+                    var firstItem = response.items[0];
+                    string answerNPC = firstItem._source.AnswerNPC;
+                    string score = firstItem._score.ToString();
+
+                    // 输出格式化后的内容
+                    outputArea.text = $"{answerNPC}\n\nScore: {score}";
+                }
+                else
+                {
+                    outputArea.text = "没有找到相关内容。";
+                }
             }
         }
     }
