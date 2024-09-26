@@ -7,7 +7,7 @@ public class CustomText : MonoBehaviour
 {
     private Text _text;
     private string _lastText;
-    
+
     public UnityEvent<string> onTextChanged;
 
     private void Awake()
@@ -21,6 +21,7 @@ public class CustomText : MonoBehaviour
         // 检查文本是否发生变化
         if (_text.text != _lastText)
         {
+            // 更新最后的文本
             _lastText = _text.text;
             // 触发事件
             onTextChanged?.Invoke(_lastText);

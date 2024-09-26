@@ -28,7 +28,7 @@ public class Response
 public class KeywordPush : MonoBehaviour
 {
     InputField outputArea;
-    CustomText inputKeywords; // 使用 CustomText 类型
+    CustomText inputKeywords; 
 
     private void Start()
     {
